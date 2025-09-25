@@ -1,0 +1,586 @@
+/* src/App.css */
+/* ────────────────────────────────────────────────────────────────────────────
+   App styles (page UI, auth, products, cart, orders).
+   - Only selectors used by the provided components are included.
+   - One-declaration-per-line formatting.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* ========== Page & Utilities ========== */
+
+.page {
+  display: grid;
+  gap: 16px;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #eef2ff;
+  margin-bottom: 4px;
+}
+
+.muted {
+  color: #93a0c6;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.feedback {
+  font-size: 0.95rem;
+}
+
+.feedback.error {
+  color: #ff8b8b;
+}
+
+/* ========== Cards ========== */
+
+.card {
+  background: rgba(18, 25, 54, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  color: #eef2ff;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* ========== Buttons (variants used across the app) ========== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease, background 0.15s ease, transform 0.02s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Support both "btn primary" and "btn btn-primary" */
+.btn.primary,
+.btn-primary {
+  background: linear-gradient(135deg, #7c9bff, #9d7cff);
+  color: #0b1020;
+  box-shadow: 0 10px 20px rgba(124, 155, 255, 0.28);
+}
+
+.btn.primary:hover,
+.btn-primary:hover {
+  box-shadow: 0 12px 26px rgba(124, 155, 255, 0.34);
+}
+
+/* Support "btn secondary" */
+.btn.secondary {
+  background: rgba(255, 255, 255, 0.06);
+  color: #e7eaff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Support NavBar’s ghost button */
+.btn-ghost {
+  background: transparent;
+  color: #eef2ff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.btn-row.end {
+  justify-content: flex-end;
+}
+
+/* Small numeric badge (used next to Cart link) */
+.badge {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 6px;
+  border-radius: 12px;
+  background: #7c3aed;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ========== Auth (Login / Register / Profile) ========== */
+
+.auth-container {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1c2e, #0d0f1a);
+  padding: 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.auth-card--left {
+  text-align: left;
+}
+
+.auth-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.auth-subtitle {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 20px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.auth-label {
+  text-align: left;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.auth-input {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+  color: #111827;
+}
+
+.auth-input:focus {
+  border-color: #6366f1;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+}
+
+.auth-input.textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+/* Show/Hide password control group from Register.tsx */
+.auth-input-group {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: stretch;
+}
+
+.auth-inline-btn {
+  margin-left: 8px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+  color: #111827;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-inline-btn:hover {
+  background: #e5e7eb;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.auth-btn.primary {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+.auth-btn.primary:hover {
+  background: #4338ca;
+}
+
+.auth-btn.secondary {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.auth-btn.secondary:hover {
+  background: #d1d5db;
+}
+
+.auth-btn.danger {
+  background: #e5e7eb;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+}
+
+.auth-btn.danger:hover {
+  background: #f3f4f6;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  color: #6b7280;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.auth-divider span {
+  margin: 0 10px;
+  font-size: 0.85rem;
+}
+
+.auth-error {
+  margin-top: 10px;
+  color: crimson;
+  font-size: 0.9rem;
+}
+
+.auth-feedback {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.auth-feedback--ok {
+  color: limegreen;
+}
+
+.auth-feedback--err {
+  color: crimson;
+}
+
+/* ========== Layout helpers used by forms ========== */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========== Admin header ========== */
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ========== Products (listing + cards + skeleton) ========== */
+
+.products-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.product-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.product-thumb {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.product-thumb.placeholder {
+  display: grid;
+  place-items: center;
+  color: #aab3d1;
+  font-size: 0.9rem;
+}
+
+.product-body {
+  display: grid;
+  gap: 8px;
+}
+
+.product-title {
+  font-weight: 800;
+}
+
+.product-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: #aab3d1;
+  align-items: center;
+}
+
+.product-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-price {
+  font-weight: 800;
+}
+
+.pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  background: rgba(124, 155, 255, 0.16);
+  color: #9db4ff;
+  border: 1px solid rgba(124, 155, 255, 0.25);
+}
+
+/* Skeletons used by product list/admin grid */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton .skeleton-line {
+  height: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.skeleton .skeleton-line.sm {
+  width: 40%;
+}
+
+.skeleton-thumb {
+  width: 100%;
+  height: 160px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 10px;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Filters on Products page */
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========== Cart ========== */
+
+.cart-card {
+  display: grid;
+  gap: 10px;
+}
+
+.cart-head,
+.cart-row,
+.cart-foot {
+  display: grid;
+  grid-template-columns: 1.6fr 0.7fr 1fr 0.8fr 0.6fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.cart-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cart-thumb.placeholder {
+  display: grid;
+  place-items: center;
+  color: #aab3d1;
+  font-size: 0.8rem;
+}
+
+.cart-title {
+  font-weight: 700;
+}
+
+.qty {
+  display: grid;
+  grid-template-columns: 32px 56px 32px;
+  align-items: center;
+  gap: 6px;
+}
+
+.qty-btn {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  height: 36px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.qty-input {
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  text-align: center;
+}
+
+.cart-foot {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 10px;
+}
+
+.cart-total {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-row .remove-btn {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cart-row .remove-btn:hover {
+  background: #dc2626;
+}
+
+.cart-foot .clear-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: transparent;
+  color: #e5e5e5;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cart-foot .clear-btn:hover {
+  background: rgb(231, 6, 6);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.hide-sm {
+  display: initial;
+}
+
+@media (max-width: 720px) {
+  .hide-sm {
+    display: none;
+  }
+  .cart-head,
+  .cart-row,
+  .cart-foot {
+    grid-template-columns: 1.6fr 1fr 0.8fr 0.6fr;
+  }
+}
+
+/* ========== Orders ========== */
+
+.orders-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.order-card {
+  padding: 1rem;
+}
+
+.order-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
