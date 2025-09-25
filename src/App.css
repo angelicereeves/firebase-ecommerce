@@ -121,7 +121,7 @@
   line-height: 1.4;
 }
 
-/* ========== Auth (Login / Register / Profile) ========== */
+/* ========== Auth (Login / Register / Profile) — scoped to prevent leaks ========== */
 
 .auth-container {
   min-height: calc(100vh - 60px);
@@ -132,7 +132,7 @@
   padding: 20px;
 }
 
-.auth-card {
+.auth-container .auth-card {
   width: 100%;
   max-width: 400px;
   padding: 30px;
@@ -142,37 +142,37 @@
   text-align: center;
 }
 
-.auth-card--left {
+.auth-container .auth-card--left {
   text-align: left;
 }
 
-.auth-title {
+.auth-container .auth-title {
   font-size: 1.6rem;
   font-weight: bold;
   margin-bottom: 8px;
   color: #111827;
 }
 
-.auth-subtitle {
+.auth-container .auth-subtitle {
   font-size: 0.95rem;
   color: #4b5563;
   margin-bottom: 20px;
 }
 
-.auth-form {
+.auth-container .auth-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
   margin-bottom: 20px;
 }
 
-.auth-label {
+.auth-container .auth-label {
   text-align: left;
   font-size: 0.9rem;
   color: #374151;
 }
 
-.auth-input {
+.auth-container .auth-input {
   padding: 12px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
@@ -181,26 +181,26 @@
   color: #111827;
 }
 
-.auth-input:focus {
+.auth-container .auth-input:focus {
   border-color: #6366f1;
   outline: none;
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
 }
 
-.auth-input.textarea {
+.auth-container .auth-input.textarea {
   resize: vertical;
   min-height: 96px;
 }
 
 /* Show/Hide password control group from Register.tsx */
-.auth-input-group {
+.auth-container .auth-input-group {
   position: relative;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: stretch;
 }
 
-.auth-inline-btn {
+.auth-container .auth-inline-btn {
   margin-left: 8px;
   padding: 0 10px;
   border-radius: 8px;
@@ -212,11 +212,11 @@
   cursor: pointer;
 }
 
-.auth-inline-btn:hover {
+.auth-container .auth-inline-btn:hover {
   background: #e5e7eb;
 }
 
-.auth-btn {
+.auth-container .auth-btn {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
@@ -227,70 +227,70 @@
   transition: background 0.2s ease;
 }
 
-.auth-btn.primary {
+.auth-container .auth-btn.primary {
   background: #4f46e5;
   color: #ffffff;
 }
 
-.auth-btn.primary:hover {
+.auth-container .auth-btn.primary:hover {
   background: #4338ca;
 }
 
-.auth-btn.secondary {
+.auth-container .auth-btn.secondary {
   background: #e5e7eb;
   color: #111827;
 }
 
-.auth-btn.secondary:hover {
+.auth-container .auth-btn.secondary:hover {
   background: #d1d5db;
 }
 
-.auth-btn.danger {
+.auth-container .auth-btn.danger {
   background: #e5e7eb;
   color: #7f1d1d;
   border: 1px solid #fecaca;
 }
 
-.auth-btn.danger:hover {
+.auth-container .auth-btn.danger:hover {
   background: #f3f4f6;
 }
 
-.auth-divider {
+.auth-container .auth-divider {
   display: flex;
   align-items: center;
   margin: 15px 0;
   color: #6b7280;
 }
 
-.auth-divider::before,
-.auth-divider::after {
+.auth-container .auth-divider::before,
+.auth-container .auth-divider::after {
   content: "";
   flex: 1;
   border-bottom: 1px solid #d1d5db;
 }
 
-.auth-divider span {
+.auth-container .auth-divider span {
   margin: 0 10px;
   font-size: 0.85rem;
 }
 
-.auth-error {
+.auth-container .auth-error {
   margin-top: 10px;
   color: crimson;
   font-size: 0.9rem;
 }
 
-.auth-feedback {
+.auth-container .auth-feedback {
   margin-top: 10px;
   text-align: center;
   font-size: 0.95rem;
 }
 
-.auth-feedback--ok {
+.auth-container .auth-feedback--ok {
   color: limegreen;
 }
 
-.auth-feedback--err {
+.auth-container .auth-feedback--err {
   color: crimson;
 }
 
@@ -583,4 +583,191 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.5rem;
+}
+
+/* ========== Forms INSIDE cards (Admin: New Product) ==========
+   Matches the screenshot look: single column, rounded dark inputs,
+   thin light borders, soft purple focus glow. Applies ONLY to forms
+   inside .card — no other pages are touched.
+   ================================================================= */
+
+.card form {
+  display: grid;
+  gap: 16px;
+}
+
+.card form .form-row,
+.card form > div {
+  display: grid;
+  gap: 8px;
+}
+
+.card form label {
+  font-size: 0.95rem;
+  color: #a8b1d3;        /* subdued label like screenshot */
+  font-weight: 600;
+}
+
+/* Inputs/textarea/select */
+.card form input[type="text"],
+.card form input[type="number"],
+.card form input[type="url"],
+.card form input[type="email"],
+.card form input[type="password"],
+.card form textarea,
+.card form select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16); /* thin light border */
+  background: rgba(12, 16, 31, 0.85);          /* deep slate fill */
+  color: #e8ecff;
+  font-size: 1rem;
+  line-height: 1.25;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05); /* subtle inner lift */
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.card form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.card form input::placeholder,
+.card form textarea::placeholder {
+  color: #7e88aa;       /* muted placeholder like screenshot */
+}
+
+.card form input:focus,
+.card form textarea:focus,
+.card form select:focus {
+  outline: none;
+  border-color: #8b5cf6;                                /* purple edge */
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.28),       /* soft glow */
+              inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  background: rgba(16, 21, 39, 0.95);
+}
+
+/* Keep any .grid-2 helpers from forcing two columns inside forms */
+.card form .grid-2 {
+  grid-template-columns: 1fr !important;
+}
+
+/* Tidy number spinners only inside card forms */
+.card form input[type="number"]::-webkit-outer-spin-button,
+.card form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.card form input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* --- Fix admin form: normalize inputs inside card forms only --- */
+.card form {
+  display: grid;
+  gap: 16px;
+}
+
+/* every field on its own line & full width */
+.card form input,
+.card form textarea,
+.card form select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* unify styling (dark fill, thin border, rounded) */
+.card form input[type="text"],
+.card form input[type="number"],
+.card form input[type="url"],
+.card form input[type="email"],
+.card form input[type="password"],
+.card form textarea,
+.card form select,
+.card form .auth-input,            /* override any stray auth-input */
+.card form .auth-input.textarea {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(12, 16, 31, 0.85);
+  color: #e8ecff;
+  font-size: 1rem;
+  line-height: 1.25;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* consistent height for textarea */
+.card form textarea,
+.card form .auth-input.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* subtle placeholder & focus like your good-looking state */
+.card form input::placeholder,
+.card form textarea::placeholder {
+  color: #7e88aa;
+}
+
+.card form input:focus,
+.card form textarea:focus,
+.card form select:focus,
+.card form .auth-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  background: rgba(16, 21, 39, 0.95);
+}
+
+/* if any grid helper sneaks in, keep the form single-column */
+.card form .grid-2 { grid-template-columns: 1fr !important; }
+
+/* tidy number spinners (only here) */
+.card form input[type="number"]::-webkit-outer-spin-button,
+.card form input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.card form input[type="number"] { -moz-appearance: textfield; }
+
+/* --- Products page: dark search + filter controls (scoped) --- */
+/* --- Products page: dark search + filter controls --- */
+.filters input[type="text"],
+.filters input[type="search"],
+.filters select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background-color: rgba(16, 21, 39, 0.95);  /* dark by default */
+  color: #e8ecff;
+  font-size: 1rem;
+  line-height: 1.25;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+
+.filters input::placeholder {
+  color: #7e88aa;
+}
+
+.filters input:focus,
+.filters select:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  background-color: rgba(20, 26, 48, 0.98); /* slightly brighter on focus */
+}
+
+/* keep dropdown styled the same */
+.filters select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+}
+
+.auth-input {
+  background-color: #1a1c2e;
+  color: white;
 }
